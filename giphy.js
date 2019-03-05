@@ -19,6 +19,17 @@ $('#enter').on('click', function(event) {
   var movie = $('#new-movie').val().trim();
   topics.push(movie);
 
+  $.ajax({
+    url: "https://api.giphy.com",
+    method: "GET",
+    data: {
+      api_key: config.key,
+      q: movie,
+      limit: 10,
+      rating: 'pg'
+    }
+  })
+
   addMovieButton();
 })
 
