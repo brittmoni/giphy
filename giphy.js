@@ -23,11 +23,14 @@ $('#enter').on('click', function(event) {
     url: "https://api.giphy.com",
     method: "GET",
     data: {
+      path: 'v1/gifs/search',
       api_key: config.key,
       q: movie,
       limit: 10,
       rating: 'pg'
     }
+  }).then(function(response) {
+
   })
 
   addMovieButton();
