@@ -20,8 +20,8 @@ $('#enter').on('click', function(event) {
   topics.push(movie);
 
   $.ajax({
-    url: "https://api.giphy.com",
-    method: "GET",
+    url: 'https://api.giphy.com',
+    method: 'GET',
     data: {
       path: 'v1/gifs/search',
       api_key: config.key,
@@ -30,7 +30,14 @@ $('#enter').on('click', function(event) {
       rating: 'pg'
     }
   }).then(function(response) {
+    var gif = response.data.image_original_url;
 
+    var movieGif = $('<img>');
+
+    movieGif.attr('src', gif);
+    movieGif.attr('alt', 'movie gif');
+
+    $('#gif-display').append(movieGif);
   })
 
   addMovieButton();
