@@ -23,7 +23,7 @@ $('#enter').on('click', function(event) {
     url: 'https://api.giphy.com',
     method: 'GET',
     data: {
-      path: 'v1/gifs/search',
+      path: 'v1/gifs/random?',
       api_key: config.key,
       q: movie,
       limit: 10,
