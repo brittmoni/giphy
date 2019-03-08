@@ -1,4 +1,4 @@
-var topics = ['Scarface', 'Juice'];
+var topics = [];
 
 function addMovieButton() {
   $('#movie-buttons').empty();
@@ -19,25 +19,27 @@ $('#enter').on('click', function(event) {
   var movie = $('#new-movie').val().trim();
   topics.push(movie);
 
+  var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + movie + '&api_key=' +
+    config.key + "&limit=10";
+
+    console.log(movie, queryURL);
+
   $.ajax({
-    url: 'https://api.giphy.com',
-    method: 'GET',
-    data: {
-      path: 'v1/gifs/random?',
-      api_key: config.key,
-      q: movie,
-      limit: 10,
-      rating: 'pg'
+    url: queryURL,
+    method: 'GET'
+  })
+  .then(function(response) {
+    for(var i = 0; i <= 9; i++){
+      var gif = response.data[i].images.original_still.url;
+      console.log(gif);
+
+      var movieGif = $('<img>');
+
+      movieGif.attr('src', gif);
+      movieGif.attr('alt', 'movie gif');
+
+      $('#gif-display').append(movieGif);
     }
-  }).then(function(response) {
-    var gif = response.data.image_original_url;
-
-    var movieGif = $('<img>');
-
-    movieGif.attr('src', gif);
-    movieGif.attr('alt', 'movie gif');
-
-    $('#gif-display').append(movieGif);
   })
 
   addMovieButton();
